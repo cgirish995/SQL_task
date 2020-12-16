@@ -1,0 +1,74 @@
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cars               |
+| hotel              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| school             |
+| student            |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.04 sec)
+
+mysql> use school;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_school |
++------------------+
+| schoolinfo       |
+| studentinfo      |
++------------------+
+2 rows in set (0.02 sec)
+
+mysql> select * from scholinfo;
+ERROR 1146 (42S02): Table 'school.scholinfo' doesn't exist
+mysql> select * from schoolinfo;
++-------------+-----------+-------------+----------------+----------------+
+| school_name | school_id | school_rank | school_address | school_started |
++-------------+-----------+-------------+----------------+----------------+
+| st,johns    |       111 |           1 | bangalore      | 1995-03-04     |
+| cambridge   |       121 |           4 | bangalore      | 1996-10-12     |
+| new horizon |       131 |           2 | bangalore      | 1992-12-28     |
+| Holy angles |       141 |           3 | Mangalore      | 2000-01-01     |
++-------------+-----------+-------------+----------------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> select * from studentinfo;
++--------------+-----------+-------------+
+| student_name | school_id | student_age |
++--------------+-----------+-------------+
+| girish       |       111 |          15 |
+| suma         |       121 |          12 |
+| vignesh      |       141 |          13 |
++--------------+-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from schoolinfo where school_name='st,johns';
+Query OK, 1 row affected (0.30 sec)
+
+
+mysql> select * from schoolinfo;
++-------------+-----------+-------------+----------------+----------------+
+| school_name | school_id | school_rank | school_address | school_started |
++-------------+-----------+-------------+----------------+----------------+
+| cambridge   |       121 |           4 | bangalore      | 1996-10-12     |
+| new horizon |       131 |           2 | bangalore      | 1992-12-28     |
+| Holy angles |       141 |           3 | Mangalore      | 2000-01-01     |
++-------------+-----------+-------------+----------------+----------------+
+3 rows in set (0.03 sec)
+
+mysql> select * from studentinfo;
++--------------+-----------+-------------+
+| student_name | school_id | student_age |
++--------------+-----------+-------------+
+| suma         |       121 |          12 |
+| vignesh      |       141 |          13 |
++--------------+-----------+-------------+
+2 rows in set (0.02 sec)
