@@ -1,0 +1,311 @@
+Questions on Basic SELECT statement:
+
+Syntax:
+
+SELECT *|{[DISTINCT] column|expression [alias],...}
+FROM table
+[WHERE condition(s)];
+
+
+1. Display all the employees whose name starts with 'S'
+
+sol: 
+
+ select * from emp where ename like 'S%';
+--+-------+---------+------+------------+---------+------+--------+
+o | ename | job     | mgr  | hiredate   | salary  | comm | deptno |
+--+-------+---------+------+------------+---------+------+--------+
+2 | sham  | manager | 7698 | 2020-06-18 | 2500.00 | NULL |     50 |
+9 | SMITH | CLERK   | 7902 | 1993-06-13 |  800.00 | 0.00 |     20 |
+8 | SCOTT | ANALYST | 7566 | 1996-03-05 | 3000.00 | NULL |     20 |
+--+-------+---------+------+------------+---------+------+--------+
+
+
+2. List the employees name having letter 'L' as the second character
+
+sol:
+
+
+mysql> select * from emp where ename like '_L%';
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | salary  | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1998-08-15 | 1600.00 | 300.00 |     30 |
+|  7695 | BLAKE | MANAGER  | 7839 | 1992-06-11 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK | MANAGER  | 7839 | 1993-05-14 | 2450.00 |   NULL |     10 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+
+
+
+
+3. List the employees name having 'E' as last but one character
+sol:
+
+
+mysql> select * from emp where ename like '%E';
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | salary  | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7695 | BLAKE | MANAGER | 7839 | 1992-06-11 | 2850.00 | NULL |     30 |
++-------+-------+---------+------+------------+---------+------+--------+
+1 row in set (0.00 sec)
+
+
+
+
+
+4. List the employees name having exactly 4 letters
+sol:
+
+mysql> select *  from emp where ename like '____';
++-------+-------+-----------+------+------------+---------+--------+--------+
+| empno | ename | job       | mgr  | hiredate   | salary  | comm   | deptno |
++-------+-------+-----------+------+------------+---------+--------+--------+
+|  7000 | jhon  | manager   | 7698 | 2020-06-18 | 2500.00 |   NULL |     50 |
+|  7002 | sham  | manager   | 7698 | 2020-06-18 | 2500.00 |   NULL |     50 |
+|  7004 | Ravi  | clerk     | 7782 | 2000-12-12 |  500.00 |   NULL |     50 |
+|  7521 | WARD  | SALESMAN  | 7698 | 1996-03-26 | 1250.00 | 500.00 |     30 |
+|  7839 | KING  | PRESIDENT | NULL | 1990-06-09 | 5000.00 |   0.00 |     10 |
+|  7902 | FORD  | ANALYST   | 7566 | 1997-12-05 | 3000.00 |   NULL |     20 |
++-------+-------+-----------+------+------------+---------+--------+--------+
+
+
+
+
+
+5. List the employee whose name is having letter 'L'
+
+sol:
+
+
+mysql> select * from emp where ename like '%L%';
++-------+--------+----------+------+------------+---------+--------+--------+
+| empno | ename  | job      | mgr  | hiredate   | salary  | comm   | deptno |
++-------+--------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1998-08-15 | 1600.00 | 300.00 |     30 |
+|  7695 | BLAKE  | MANAGER  | 7839 | 1992-06-11 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK  | MANAGER  | 7839 | 1993-05-14 | 2450.00 |   NULL |     10 |
+|  7934 | MILLER | CLERK    | 7782 | 2000-01-21 | 1300.00 |   NULL |     10 |
++-------+--------+----------+------+------------+---------+--------+--------+
+
+
+
+
+6. List the employees name having atleast 5 characters
+sol:
+
+mysql> select * from emp where ename like '_____';
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | salary  | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1993-06-13 |  800.00 |   0.00 |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1998-08-15 | 1600.00 | 300.00 |     30 |
+|  7566 | JONES | MANAGER  | 7839 | 1995-10-31 | 2975.00 |   NULL |     20 |
+|  7695 | BLAKE | MANAGER  | 7839 | 1992-06-11 | 2850.00 |   NULL |     30 |
+|  7782 | CLARK | MANAGER  | 7839 | 1993-05-14 | 2450.00 |   NULL |     10 |
+|  7788 | SCOTT | ANALYST  | 7566 | 1996-03-05 | 3000.00 |   NULL |     20 |
+|  7876 | ADAMS | CLERK    | 7788 | 1999-06-04 | 1100.00 |   NULL |     20 |
+|  7900 | JAMES | CLERK    | 7698 | 2000-06-23 |  950.00 |   NULL |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+
+
+7. List employees earning between 2000 and 3000
+sol:
+
+mysql> select * from emp where salary between 2000 and 3000;
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | salary  | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7000 | jhon  | manager | 7698 | 2020-06-18 | 2500.00 | NULL |     50 |
+|  7002 | sham  | manager | 7698 | 2020-06-18 | 2500.00 | NULL |     50 |
+|  7566 | JONES | MANAGER | 7839 | 1995-10-31 | 2975.00 | NULL |     20 |
+|  7695 | BLAKE | MANAGER | 7839 | 1992-06-11 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1993-05-14 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT | ANALYST | 7566 | 1996-03-05 | 3000.00 | NULL |     20 |
+|  7902 | FORD  | ANALYST | 7566 | 1997-12-05 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+7 rows in set (0.03 sec)
+
+
+9. List emp who do not have any reporting manager or commision is Null
+sol:
+
+mysql> select * from emp where mgr is null or comm is null;
++-------+--------+-----------+------+------------+---------+------+--------+
+| empno | ename  | job       | mgr  | hiredate   | salary  | comm | deptno |
++-------+--------+-----------+------+------------+---------+------+--------+
+|  7000 | jhon   | manager   | 7698 | 2020-06-18 | 2500.00 | NULL |     50 |
+|  7002 | sham   | manager   | 7698 | 2020-06-18 | 2500.00 | NULL |     50 |
+|  7004 | Ravi   | clerk     | 7782 | 2000-12-12 |  500.00 | NULL |     50 |
+|  7566 | JONES  | MANAGER   | 7839 | 1995-10-31 | 2975.00 | NULL |     20 |
+|  7695 | BLAKE  | MANAGER   | 7839 | 1992-06-11 | 2850.00 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1993-05-14 | 2450.00 | NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1996-03-05 | 3000.00 | NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1990-06-09 | 5000.00 | 0.00 |     10 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1999-06-04 | 1100.00 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 2000-06-23 |  950.00 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1997-12-05 | 3000.00 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 2000-01-21 | 1300.00 | NULL |     10 |
++-------+--------+-----------+------+------------+---------+------+--------+
+
+
+
+
+10. List emp who do not have any reporting manager AND commision is Null
+sol:
+
+mysql> select * from emp where mgr is null and  comm is NULL;
+Empty set (0.00 sec)
+
+11. List only managers
+sol:
+mysql> select * from emp where job ='manager';
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | salary  | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7000 | jhon  | manager | 7698 | 2020-06-18 | 2500.00 | NULL |     50 |
+|  7002 | sham  | manager | 7698 | 2020-06-18 | 2500.00 | NULL |     50 |
+|  7566 | JONES | MANAGER | 7839 | 1995-10-31 | 2975.00 | NULL |     20 |
+|  7695 | BLAKE | MANAGER | 7839 | 1992-06-11 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1993-05-14 | 2450.00 | NULL |     10 |
++-------+-------+---------+------+------------+---------+------+--------+
+
+
+
+12. List managers working in dept 10 and 20
+sol:
+mysql> select * from emp where job='manager' and deptno in (10,20);
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | salary  | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1995-10-31 | 2975.00 | NULL |     20 |
+|  7782 | CLARK | MANAGER | 7839 | 1993-05-14 | 2450.00 | NULL |     10 |
++-------+-------+---------+------+------------+---------+------+--------+
+
+
+
+13. List all the clerks and analysts with salary atleast 1000 in dept 20 and 30
+sol:
+
+mysql> select * from emp where job in ('clerk','analyst') and salary<=1000 and deptno in(20,30);
++-------+-------+-------+------+------------+--------+------+--------+
+| empno | ename | job   | mgr  | hiredate   | salary | comm | deptno |
++-------+-------+-------+------+------------+--------+------+--------+
+|  7369 | SMITH | CLERK | 7902 | 1993-06-13 | 800.00 | 0.00 |     20 |
+|  7900 | JAMES | CLERK | 7698 | 2000-06-23 | 950.00 | NULL |     30 |
++-------+-------+-------+------+------------+--------+------+--------+
+
+
+14. List the employees in dept 20 and 30 who get no commision
+sol:
+
+mysql> select * from emp where deptno in(20,30) and comm is null;
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | salary  | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1995-10-31 | 2975.00 | NULL |     20 |
+|  7695 | BLAKE | MANAGER | 7839 | 1992-06-11 | 2850.00 | NULL |     30 |
+|  7788 | SCOTT | ANALYST | 7566 | 1996-03-05 | 3000.00 | NULL |     20 |
+|  7876 | ADAMS | CLERK   | 7788 | 1999-06-04 | 1100.00 | NULL |     20 |
+|  7900 | JAMES | CLERK   | 7698 | 2000-06-23 |  950.00 | NULL |     30 |
+|  7902 | FORD  | ANALYST | 7566 | 1997-12-05 | 3000.00 | NULL |     20 |
++-------+-------+---------+------+------------+---------+------+--------+
+6 rows in set (0.00 sec)
+
+
+
+
+15. List employees whose name starts with either 'A' or 'S' in dept 20
+sol:
+mysql> select * from emp where ename like 'A%' or ename like 'S%' and deptno=20;
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | salary  | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1993-06-13 |  800.00 |   0.00 |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1998-08-15 | 1600.00 | 300.00 |     30 |
+|  7788 | SCOTT | ANALYST  | 7566 | 1996-03-05 | 3000.00 |   NULL |     20 |
+|  7876 | ADAMS | CLERK    | 7788 | 1999-06-04 | 1100.00 |   NULL |     20 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+
+
+
+16. List all the employee whoe name does not end with 'S' in dept 20 and 30
+sol:
+mysql> select * from emp where ename like 'A%' or ename like 'S%' and deptno=2
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | salary  | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1993-06-13 |  800.00 |   0.00 |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1998-08-15 | 1600.00 | 300.00 |     30 |
+|  7788 | SCOTT | ANALYST  | 7566 | 1996-03-05 | 3000.00 |   NULL |     20 |
+|  7876 | ADAMS | CLERK    | 7788 | 1999-06-04 | 1100.00 |   NULL |     20 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+
+
+
+17. List the employees who are getting some commision with sal > 1500 in dept 30
+sol:
+mysql> select * from emp where comm is not null and salary>1500 and deptno in(30);
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | salary  | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1998-08-15 | 1600.00 | 300.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+
+
+18. List the employees who are getting some commision with sal>1500 in dept 30
+
+sol:
+mysql> select * from emp where comm is not null and salary>1500 and deptno in(30);
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | salary  | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1998-08-15 | 1600.00 | 300.00 |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+1 row in set (0.00 sec)
+
+
+19. List emp working as managers and clerks with Salary atleast 2000 except in dept 10 and 20
+
+sol:
+mysql> select * from emp where job in('manager','clerk') and salary<=2000 and deptno not in(10,20);
++-------+-------+-------+------+------------+--------+------+--------+
+| empno | ename | job   | mgr  | hiredate   | salary | comm | deptno |
++-------+-------+-------+------+------------+--------+------+--------+
+|  7004 | Ravi  | clerk | 7782 | 2000-12-12 | 500.00 | NULL |     50 |
+|  7900 | JAMES | CLERK | 7698 | 2000-06-23 | 950.00 | NULL |     30 |
++-------+-------+-------+------+------------+--------+------+--------+
+
+
+20. List emp who get commmision
+sol:
+mysql> select * from emp where comm is not null and comm not in(0.00);
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | salary  | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1998-08-15 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1996-03-26 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1998-12-05 | 1250.00 | 1400.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+
+
+21. List employees in all dept whose salary not in the range of 2000 to 3000 with the job which is having a string called 'MAN'
+
+sol:
+
+mysql> select * from emp where salary not between 2000 and 3000 and job like '%MAN%';
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | salary  | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7499 | ALLEN  | SALESMAN | 7698 | 1998-08-15 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1996-03-26 | 1250.00 |  500.00 |     30 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1998-12-05 | 1250.00 | 1400.00 |     30 |
+|  7844 | TURNER | SALESMAN | 7698 | 1995-06-04 | 1500.00 |    0.00 |     30 |
++-------+--------+----------+------+------------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+
